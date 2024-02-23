@@ -1,22 +1,13 @@
+Jenkinsfile (Declarative Pipeline)
 pipeline {
-    agent any
-     stages {
-        stage('Build') { 
-            steps { 
-                sh 'make' 
-            }
-        }
-        stage('Test'){
+    agent {
+        docker { image 'node:16.13.1-alpine' }
+    }
+    stages {
+        stage('Test') {
             steps {
-                sh 'make check'
-                junit 'reports/**/*.xml' 
-            }
-        }
-        stage('Deploy') {
-            steps {
-                sh 'make publish'
+                sh 'node --version'
             }
         }
     }
-} 
-
+}
